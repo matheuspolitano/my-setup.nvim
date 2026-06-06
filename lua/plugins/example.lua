@@ -58,9 +58,11 @@ return {
 
   -- 6. Import LazyVim community extras
   { import = "lazyvim.plugins.extras.lang.typescript" },
-  { import = "lazyvim.plugins.extras.ui.mini-starter" },
+  --{ import = "lazyvim.plugins.extras.ui.mini-starter" },
   { import = "lazyvim.plugins.extras.lang.json" },
-
+  { import = "lazyvim.plugins.extras.dap.core" },
+  { import = "lazyvim.plugins.extras.lang.python" },
+  { import = "lazyvim.plugins.extras.test.core" },
   -- 7. Add extra Treesitter parsers (safely extending defaults)
   {
     "nvim-treesitter/nvim-treesitter",
@@ -108,6 +110,7 @@ return {
         "shellcheck",
         "shfmt",
         "flake8",
+        "ruff",
       },
     },
   },
