@@ -1,10 +1,11 @@
 return {
-  -- 1. Add and configure a custom colorscheme
-  { "ellisonleao/gruvbox.nvim" },
+  {
+    "EdenEast/nightfox.nvim",
+  },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "dayFox",
     },
   },
 
