@@ -8,7 +8,26 @@ return {
       colorscheme = "dayFox",
     },
   },
+  {
+    "folke/snacks.nvim",
+    opts = {
+      -- 1. Ensure Snacks Explorer is turned on
+      explorer = { enabled = true },
 
+      -- 2. Move the explorer to the right side
+      picker = {
+        sources = {
+          explorer = {
+            layout = {
+              layout = {
+                position = "right",
+              },
+            },
+          },
+        },
+      },
+    },
+  },
   -- 2. Modify trouble.nvim configuration
   {
     "folke/trouble.nvim",
@@ -64,6 +83,7 @@ return {
   { import = "lazyvim.plugins.extras.dap.core" },
   { import = "lazyvim.plugins.extras.lang.python" },
   { import = "lazyvim.plugins.extras.test.core" },
+
   -- 7. Add extra Treesitter parsers (safely extending defaults)
   {
     "nvim-treesitter/nvim-treesitter",
@@ -112,6 +132,59 @@ return {
         "shfmt",
         "flake8",
         "ruff",
+      },
+    },
+  },
+
+  -- 10. Git Diff & Merge Tool (Diffview)
+  {
+    "sindrets/diffview.nvim",
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewClose",
+      "DiffviewToggleFiles",
+      "DiffviewFocusFiles",
+      "DiffviewRefresh",
+      "DiffviewFileHistory",
+    },
+    keys = {
+      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview Open (Working Tree)" },
+      { "<leader>gD", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
+      { "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", desc = "Diffview File History (Current)" },
+      { "<leader>gH", "<cmd>DiffviewFileHistory<cr>", desc = "Diffview Branch History" },
+    },
+    opts = {
+      enhanced_diff_highlight = true,
+      use_icons = true,
+      view = {
+        default = {
+          layout = "diff2_horizontal",
+        },
+        merge_tool = {
+          layout = "diff3_horizontal",
+          disable_diagnostics = true, -- Clean view during merge conflict resolution
+        },
+        file_history = {
+          layout = "diff2_horizontal",
+        },
+      },
+      file_panel = {
+        listing_style = "tree",
+        tree_options = {
+          flatten_dirs = true,
+          folder_statuses = "never",
+        },
+        win_config = {
+          position = "left",
+          width = 35,
+        },
+      },
+      hooks = {
+        diff_buf_read = function(bufnr)
+          -- Ensure line numbers remain visible inside diff buffers
+          vim.opt_local.number = true
+          vim.opt_local.relativenumber = false
+        end,
       },
     },
   },
